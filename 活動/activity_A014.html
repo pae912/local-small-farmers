@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>活動A014</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        table {
+            border: 3px solid rgb(187, 244, 255);
+            border-collapse: collapse;
+            width: 60%;
+        }
+        
+        td {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body onload="init()">
+    <!-- 此 div 區域用來顯示查詢的結果 -->
+    <div id="demo"></div>
+    <script>
+        /* 此函數在網頁一載入（onload）時，立即執行 */
+        function init() { /* 此範例沒有設定任何的查詢條件 */
+            /* 設定處理 ajax 請求的 php 檔案 */
+            var myUrl = "activity_A014.php";
+            /* 底下是利用發出 jQuery 的 ajax 請求方式去呼叫 php 程式存取資料庫
+             * ajax 的各項屬性意義為.....
+             * url: 代表處理 ajax 請求的檔案
+             * type: 發出請求的方式。一般設定為 POST 或 GET
+             * dataType: 設定從伺服器回傳查詢結果的資料格式
+             * data: 要被送至伺服器處理的查詢字串。通常是傳送使用者輸入的查詢條件
+             * async: 是否採用非同步(async)的方式處理。預設值是 true
+             * success: 請求成功時所要執行的函式
+             * error: 請求失敗時所要執行的函式
+             */
+            $.ajax({
+                url: myUrl,
+                type: 'POST',
+                async: true,
+                dataType: 'json',
+                /* 函式中的 backData 參數：伺服器回傳的查詢結果 */
+                /* 亦即，backData 是 queryDB.php 執行後回傳至前端的結果 */
+                success: function(backData, jqXHR) {
+                    if (backData == "null") { /* 亦即 queryDB.php 沒有查詢到任何的資料 */
+                        document.getElementById('demo').innerHTML = "找不到任何的資料!";
+                    } else { /* 亦即 queryDB.php 有查詢到某些資料 */
+                        /* 將 queryDB.php 回傳的查詢結果，傳入 dispAll() 函數作進一步處理 */
+                        console.log(backData);
+                        dispAll(backData);
+                    }
+                },
+                /* 亦即 queryDB.php 在執行時出現錯誤 */
+                error: function(textStatus) {
+                    document.getElementById('demo').innerHTML = "無法進行查詢！";
+                }
+            });
+        }
+
+        /* 此函式用來顯示所有的資料 */
+        function dispAll(allData) {
+            var str = "";
+            /* 此處的目的，是要將 php 查詢的結果，放入 table 中 */
+            str += "<table border='1'>";
+            str += "<tr><th>農場名稱</th><th>活動名稱</th><th>地點</th><th>時間</th><th>合作單位</th><th>合作單位聯絡人</th><th>合作單位聯絡電話</th></tr>";
+            /* 利用 for 迴圈，逐一取出每一筆資料 */
+            for (var i = 0; i < allData.length; i++) {
+                /*str += "<tr><td>" + (i + 1) + "</td>";*/
+                /* 底下依序取出查詢結果的各筆資料 */
+                /* 在此範例中，每一筆資料皆有 EngWord, ChiWord, Owner, ErrorCount 四個欄位的資料 */
+                /* 值得一提的是，此處取得陣列中每一筆資料的方式，乃是配合後端 php 輸出的格式 */
+                /* 在此範例中，因為後端 php 是將查詢結果，用「關聯型」陣列輸出 */
+                /* 因此，在此處取得每一筆資料時，亦需用「關聯型」陣列去取得值 */
+                str += "<tr><td>" + allData[i]['Bname'] + "</td>";
+                str += "<td>" + allData[i]['Aname'] + "</td>";
+                str += "<td>" + allData[i]['Place'] + "</td>";
+                str += "<td>" + allData[i]['Atime'] + "</td>";
+                str += "<td>" + allData[i]['Cooperative'] + "</td>";
+                str += "<td>" + allData[i]['Contact_person'] + "</td>";
+                str += "<td>" + allData[i]['Contact_phone'] + "</td></tr>";
+            }
+            str += "</table>";
+            document.getElementById('demo').innerHTML = str;
+        }
+    </script>
+</body>
+
+</html>

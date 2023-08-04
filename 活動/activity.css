@@ -1,0 +1,41 @@
+        .farm_name {
+            /* padding: 20px; */
+            font-size: 30px;
+            text-align: center;
+            /* position:fixed; */
+        }
+        
+        .farm_img {
+            width: 60px;
+            border-radius: 50%;
+            margin: 10px;
+            padding: 5px;
+            vertical-align: middle;
+        }
+        
+        body {
+            margin: 0;
+        }
+        
+        .demo {
+            padding: 30px;
+        }
+        
+        .content-card {
+            /* border: 3px solid red;*/
+            display: inline-table;
+            margin: 10px;
+        }
+        
+        .activities_photos {
+            width: 400px;
+            height: 250px;
+            border-radius: 15px;
+            transition: all 0.6s;
+            box-shadow: 3px 3px 12px gray;
+        }
+        
+        .activities_photos:hover {
+            border-radius: 30px;
+            transform: scale(1.1);
+        }

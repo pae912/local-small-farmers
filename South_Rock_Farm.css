@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+}
+
+header {
+    background-color:rgb(179, 255, 204);
+}
+
+.farm_name {
+    font-size: 30px;
+    text-align: center;
+}
+
+.farm_img {
+    width: 60px;
+    border-radius: 50%;
+    margin: 10px;
+    padding: 5px;
+    vertical-align: middle;
+}
+.farm_introduction{
+    font-size: 35px;
+    padding: 10px;
+    margin: 20px;
+}
+.farm_introduction_word{
+    font-size: 20px;
+    padding: 10px;
+    margin: 40px;
+}
+.local_activities{
+    font-size: 35px;
+    padding: 10px;
+    margin: 20px;
+}
+.activities_name {
+    font-size: 30px;
+    padding: 0px 20px 10px 50px;
+    margin: 20px;
+}
+
+.activity_sheet {
+    text-decoration: none;
+    color: black;
+}
+
+.activity_sheet .activities_name:hover {
+    color: rgb(144, 43, 43);
+}
+
+.img_box {
+    width: 400px;
+    height: 250px;
+    overflow: hidden;
+    display: inline-block;
+    border-radius: 15px;
+    padding: 0 0 10px 40px;
+}
+
+.activities_photos {
+    width: 400px;
+    height: 250px;
+    border-radius: 15px;
+    transition: all 0.6s;
+    box-shadow:3px 3px 12px gray;
+}
+
+.activities_photos:hover {
+    border-radius: 30px;
+    transform: scale(1.1);
+}
+
+
+
+.contact_us {
+    padding: 4px;
+    width: 100%;
+    background-color:  #66cc99;
+    margin-top: 100px;
+    margin-left: -0.5em;
+}
+
+.contact_information {
+    list-style-type: none;
+    font-size: 20px;
+}
+
+.contact_information li {
+    padding: 15px;
+}
+.farm{
+    text-decoration: none;
+    color: black;
+}
+.contact_icon {
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    vertical-align: middle;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>南岩心農場</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./activity.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="icon" href="./南岩心農場.ico" type="image/x-icon" />
+    <style>
+        header {
+            background-color: rgb(179, 255, 204);
+        }
+    </style>
+</head>
+
+<body onload="init()">
+    <header>
+        <div class="farm_name"><img class="farm_img" src="./南岩心農場.jpg" alt="南岩心農場">南岩心農場</div>
+    </header>
+    <div class='w-layout-grid works-grid' style='text-align: center;'></div>
+    <!-- 此 div 區域用來顯示查詢的結果 -->
+    <div id="demo" class="demo" style='text-align: center;'></div>
+    <script>
+        var url = './activity_A021_photo.php';
+
+        axios.post(url)
+            .then(response => {
+                show(response.data);
+            })
+            .catch(error => console.log(error))
+
+        function show(inData) {
+            var outDiv = document.getElementsByClassName("works-grid")[0];
+
+            for (var i = 0; i < inData.length; i++) {
+                // 建立一個 card 的 div 元素
+                var cardDiv = document.createElement("div");
+                cardDiv.className = "content-card";
+                // 建立一個 h2 元素
+                var inH = document.createElement("h2");
+                inH.className = 'title-name';
+                inH.innerHTML = inData[i][0];
+
+                // 建立一個 div 元素
+                var inDiv1 = document.createElement("div");
+                inDiv1.className = "content-wrapper";
+                inDiv1.innerHTML = "地點 : " + inData[i][1];
+                // 建立一個 div 元素
+                var inDiv2 = document.createElement("div");
+                inDiv2.className = "content-wrapper";
+                inDiv2.innerHTML = "時間 : " + inData[i][2];
+
+                var imgDir = "活動照片/";
+                // 建立一個 img 元素
+                var inImg = document.createElement("img");
+                inImg.className = "activities_photos"
+                inImg.src = imgDir + inData[i][3];
+
+
+                // 依序將上述的 h2, div, img 元素，新增至 card 中
+                cardDiv.appendChild(inH);
+                cardDiv.appendChild(inImg);
+                cardDiv.appendChild(inDiv1);
+                cardDiv.appendChild(inDiv2);
+
+                outDiv.appendChild(cardDiv);
+            }
+        }
+        var myurl = './activity_A021.php';
+
+        axios.post(myurl)
+            .then(response => {
+                dispAll(response.data);
+            })
+            .catch(error => console.log(error))
+
+        function dispAll(allData) {
+            var outDiv1 = document.getElementsByClassName("demo")[0];
+
+            for (var i = 0; i < allData.length; i++) {
+                // 建立一個 card 的 div 元素
+                var cardDiv1 = document.createElement("div");
+                cardDiv1.className = "content-card";
+                var inDiv3 = document.createElement("div");
+                inDiv3.className = "content-wrapper";
+                inDiv3.innerHTML = "合作單位 : " + allData[i][0];
+                var inDiv4 = document.createElement("div");
+                inDiv4.className = "content-wrapper";
+                inDiv4.innerHTML = "合作單位聯絡人 :" + allData[i][1];
+                var inDiv5 = document.createElement("div");
+                inDiv5.className = "content-wrapper";
+                inDiv5.innerHTML = "合作單位聯絡電話 : " + allData[i][2];
+
+                cardDiv1.appendChild(inDiv3);
+                cardDiv1.appendChild(inDiv4);
+                cardDiv1.appendChild(inDiv5);
+
+                outDiv1.appendChild(cardDiv1);
+            }
+        }
+    </script>
+</body>
+
+</html>
